@@ -33,7 +33,7 @@ export default function Dashboard() {
 
   const fetchPacientes = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/pacientes');
+      const response = await axios.get('https://dental-crud.onrender.com/pacientes');
       setPacientes(response.data);
     } catch (error) {
       console.error('Erro ao buscar pacientes:', error);
@@ -52,7 +52,7 @@ export default function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/pacientes', form);
+      await axios.post('https://dental-crud.onrender.com/pacientes', form);
       fetchPacientes();
       setForm({
         nome: '',
@@ -69,7 +69,7 @@ export default function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/pacientes/${id}`);
+      await axios.delete(`https://dental-crud.onrender.com/pacientes/${id}`);
       fetchPacientes();
     } catch (error) {
       console.error('Erro ao deletar paciente:', error);
@@ -98,7 +98,7 @@ export default function Dashboard() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3001/pacientes/${selectedPatient.id}`, form);
+      await axios.put(`https://dental-crud.onrender.com/pacientes/${selectedPatient.id}`, form);
       fetchPacientes();
       closeEditModal();
     } catch (error) {
