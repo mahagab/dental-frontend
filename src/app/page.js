@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import InputMask from 'react-input-mask';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Dashboard() {
   const [pacientes, setPacientes] = useState([]);
@@ -33,7 +34,7 @@ export default function Dashboard() {
 
   const fetchPacientes = async () => {
     try {
-      const response = await axios.get('https://dental-crud.onrender.com/pacientes');
+      const response = await axios.get(`${apiUrl}/pacientes`);
       setPacientes(response.data);
     } catch (error) {
       console.error('Erro ao buscar pacientes:', error);
@@ -52,7 +53,7 @@ export default function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://dental-crud.onrender.com/pacientes', form);
+      await axios.post(`${apiUrl}/pacientes`, form);
       fetchPacientes();
       setForm({
         nome: '',
@@ -69,7 +70,7 @@ export default function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://dental-crud.onrender.com/pacientes/${id}`);
+      await axios.delete(`${apiUrl}/pacientes/${id}`);
       fetchPacientes();
     } catch (error) {
       console.error('Erro ao deletar paciente:', error);
@@ -98,7 +99,7 @@ export default function Dashboard() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://dental-crud.onrender.com/pacientes/${selectedPatient.id}`, form);
+      await axios.put(`${apiUrl}/pacientes/${selectedPatient.id}`, form);
       fetchPacientes();
       closeEditModal();
     } catch (error) {
